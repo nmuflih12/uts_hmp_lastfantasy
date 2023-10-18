@@ -1,0 +1,79 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Cerbung
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="content">
+    <ion-segment [(ngModel)]="genre">
+      <ion-segment-button value="Semua">
+        <ion-label>Semua</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Aksi">
+        <ion-label>Aksi</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Fantasy">
+        <ion-label>Fantasy</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Romance">
+        <ion-label>Romance</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div *ngIf="genre != 'Semua'">
+      <div *ngFor="let cerbung of cerbungs">
+        <ion-card *ngIf="cerbung.genre == genre">
+          <ion-card>
+            <ion-img src="{{cerbung.gambar}}" />
+            <ion-card-header>
+              <ion-card-title>{{cerbung.nama}}</ion-card-title>
+              <ion-card-subtitle>oleh {{cerbung.pembuat}}</ion-card-subtitle><br />
+              <ion-item>
+                <ion-icon name="thumbs-up-outline" />
+                <ion-label>&nbsp;{{cerbung.disukai}}</ion-label>
+              </ion-item>
+              <br />
+            </ion-card-header>
+            <ion-card-content>
+              {{cerbung.deskripsi}}
+            </ion-card-content>
+            <ion-button class="btnCard">Baca</ion-button><br />
+          </ion-card>
+        </ion-card>
+      </div>
+    </div>
+
+    <div *ngIf="genre == 'Semua'">
+      <div *ngFor="let cerbung of cerbungs">
+        <ion-card>
+          <ion-img src="{{cerbung.gambar}}" />
+          <ion-card-header>
+            <ion-card-title>{{cerbung.nama}}</ion-card-title>
+            <ion-card-subtitle>oleh {{cerbung.pembuat}}</ion-card-subtitle><br />
+            <ion-item>
+              <ion-icon name="thumbs-up-outline" />
+              <ion-label>&nbsp;{{cerbung.disukai}}</ion-label>
+            </ion-item>
+            <br />
+          </ion-card-header>
+          <ion-card-content>
+            {{cerbung.deskripsi}}
+          </ion-card-content>
+          <ion-button class="btnCard">Baca</ion-button><br />
+        </ion-card>
+      </div>
+    </div>
+  </div>
+</ion-content>
