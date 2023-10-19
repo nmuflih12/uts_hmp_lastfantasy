@@ -3,6 +3,10 @@
     <ion-title>
       Cerbung
     </ion-title>
+    <ion-item *ngIf="accountservice.sedangLogin == true" slot="end">
+      Halo, {{accountservice.currentLoginName}}!&nbsp;<ion-avatar><img alt="person"
+          src="{{accountservice.currentImage}}" /></ion-avatar>
+    </ion-item>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -32,48 +36,62 @@
       </ion-segment-button>
     </ion-segment>
 
-    <div *ngIf="genre != 'Semua'">
-      <div *ngFor="let cerbung of cerbungs">
-        <ion-card *ngIf="cerbung.genre == genre">
-          <ion-card>
-            <ion-img src="{{cerbung.gambar}}" />
-            <ion-card-header>
-              <ion-card-title>{{cerbung.nama}}</ion-card-title>
-              <ion-card-subtitle>oleh {{cerbung.pembuat}}</ion-card-subtitle><br />
-              <ion-item>
-                <ion-icon name="thumbs-up-outline" />
-                <ion-label>&nbsp;{{cerbung.disukai}}</ion-label>
-              </ion-item>
-              <br />
-            </ion-card-header>
-            <ion-card-content>
-              {{cerbung.deskripsi}}
-            </ion-card-content>
-            <ion-button class="btnCard">Baca</ion-button><br />
-          </ion-card>
-        </ion-card>
-      </div>
-    </div>
-
     <div *ngIf="genre == 'Semua'">
-      <div *ngFor="let cerbung of cerbungs">
+      <div *ngFor="let cerbung of cerbungs; let i=index">
         <ion-card>
           <ion-img src="{{cerbung.gambar}}" />
           <ion-card-header>
             <ion-card-title>{{cerbung.nama}}</ion-card-title>
-            <ion-card-subtitle>oleh {{cerbung.pembuat}}</ion-card-subtitle><br />
-            <ion-item>
-              <ion-icon name="thumbs-up-outline" />
-              <ion-label>&nbsp;{{cerbung.disukai}}</ion-label>
-            </ion-item>
-            <br />
+            <ion-card-subtitle><ion-icon name="person"/><ion-label>&nbsp;{{cerbung.pembuat}}</ion-label></ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            {{cerbung.deskripsi}}
+            <ion-label>{{cerbung.deskripsi}}</ion-label><br>
+            <ion-item lines="none">
+              <ion-chip id="mainLike" color="primary">
+                <ion-icon name="thumbs-up-outline" />
+                <ion-label>&nbsp;{{cerbung.disukai}}</ion-label>
+              </ion-chip>
+              <ion-badge slot="end" [color]="cerbung.genre == 'Aksi' ? 'dark' : 
+              cerbung.genre == 'Fantasy' ? 'warning' :
+              cerbung.genre == 'Romance' ? 'danger' : 'primary'">
+                <ion-label>{{cerbung.genre}}</ion-label>
+              </ion-badge>
+            </ion-item>
           </ion-card-content>
-          <ion-button class="btnCard">Baca</ion-button><br />
+          <ion-button class="btnCard" routerLink="./bacacerbung/{{i}}">Baca</ion-button>
         </ion-card>
       </div>
     </div>
+
+    <div *ngIf="genre != 'Semua'">
+      <div *ngFor="let cerbung of cerbungs; let i=index">
+        <div *ngIf="cerbung.genre == genre">
+          <ion-card>
+            <ion-img src="{{cerbung.gambar}}" />
+          <ion-card-header>
+            <ion-card-title>{{cerbung.nama}}</ion-card-title>
+            <ion-card-subtitle><ion-icon name="person"/><ion-label>&nbsp;{{cerbung.pembuat}}</ion-label></ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label>{{cerbung.deskripsi}}</ion-label><br>
+            <ion-item lines="none">
+              <ion-chip id="mainLike" color="primary">
+                <ion-icon name="thumbs-up-outline" />
+                <ion-label>&nbsp;{{cerbung.disukai}}</ion-label>
+              </ion-chip>
+              <ion-badge slot="end" [color]="cerbung.genre == 'Aksi' ? 'dark' : 
+              cerbung.genre == 'Fantasy' ? 'warning' :
+              cerbung.genre == 'Romance' ? 'danger' : 'primary'">
+                <ion-label>{{cerbung.genre}}</ion-label>
+              </ion-badge>
+            </ion-item>
+          </ion-card-content>
+          <ion-button class="btnCard" routerLink="./bacacerbung/{{i}}">Baca</ion-button>
+          </ion-card>
+        </div>
+      </div>
+    </div>
+
+    
   </div>
 </ion-content>

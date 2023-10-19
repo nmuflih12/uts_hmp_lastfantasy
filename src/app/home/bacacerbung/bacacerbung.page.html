@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Baca Cerbung</ion-title>
+    <ion-buttons slot="start"><ion-back-button /></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">bacacerbung</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="content">
+    <ion-card>
+        <ion-card-header>
+          <ion-img src="{{cerbungs[id].gambar}}" />
+          <ion-card-title>{{cerbungs[id].nama}}</ion-card-title>
+          <ion-card-subtitle><ion-icon name="person"/> {{cerbungs[id].pembuat}}</ion-card-subtitle><br />
+          <ion-label>{{cerbungs[id].deskripsi}}</ion-label><br/>
+              <ion-item lines="none">
+                <ion-chip color="primary"><ion-icon name="thumbs-up-outline" />
+                  <ion-label>&nbsp;{{cerbungs[id].disukai}}</ion-label></ion-chip>
+                <br>
+                <ion-badge slot="end" 
+                [color]="cerbungs[id].genre == 'Aksi' ? 'dark' : 
+                cerbungs[id].genre == 'Fantasy' ? 'tertiary' :
+                cerbungs[id].genre == 'Romance' ? 'danger' : 'primary'">
+                    <ion-label>{{cerbungs[id].genre}}</ion-label>
+                </ion-badge>
+              </ion-item>
+            </ion-card-header>
+            <ion-card-content>
+                <div *ngFor="let isicerbung of cerbungs[id].isicerbung">
+                  <ion-card>
+                    <ion-card-content>
+                      <ion-label color="dark">{{isicerbung.isi}}</ion-label>
+                      <br><br>
+                      <div id="personContainer"><ion-icon name="person"/><ion-label> {{isicerbung.pembuat}}</ion-label>
+                        &nbsp;<ion-chip color="medium"><ion-icon name="thumbs-up-outline" />
+                          <ion-label>{{isicerbung.disukai}}</ion-label></ion-chip></div>
+                    </ion-card-content>
+                  </ion-card>
+                  
+                </div>
+            </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

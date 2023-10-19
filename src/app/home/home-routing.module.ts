@@ -6,6 +6,14 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
+  },
+  {
+    path: 'bacacerbung/:id',
+    loadChildren: () => import('./bacacerbung/bacacerbung.module').then( m => m.BacacerbungPageModule)
+  },
+  {
+    path: 'buatcerbung',
+    loadChildren: () => import('./buatcerbung/buatcerbung.module').then( m => m.BuatcerbungPageModule)
   }
 ];
 
